@@ -7,6 +7,24 @@
   justify-self: center;
   box-sizing: border-box;
 }
+.helpBtn {
+  position: absolute;
+  left: 25rpx;
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 100rpx;
+  color: rgb(255, 255, 255);
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'num';
+  font-size: 60rpx;
+}
+.helpBtnHover {
+  color: rgb(0, 255, 0);
+
+}
 .contentContainer {
   /* text-indent: 30rpx; */
   background-color: black;

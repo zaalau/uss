@@ -12,6 +12,8 @@ Page({
     this.setData({
       showTextarea: !this.data.showTextarea
     })
+    wx.vibrateShort()
+
   },
   setContent(e) {
     this.setData({
@@ -26,8 +28,10 @@ Page({
     this.setData({
       menuHeight: res.height,
       menuWidth: res.width,
-      dday: Math.trunc((new Date().getTime()-new Date(2022,6,19).getTime())/86400000)
-      
+      dday: Math.trunc((new Date().getTime()-new Date(2022,6,19).getTime())/86400000),
+      Year: new Date().getFullYear(),
+      Month: new Date().getMonth()+1,
+      Dateday: new Date().getDate(),
     })
     wx.getSystemInfo({
       success: res => {
