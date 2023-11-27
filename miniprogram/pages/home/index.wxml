@@ -1,0 +1,15 @@
+<!--pages/home/index.wxml-->
+<view class="homeContainer" style="min-height: {{homeHeight}}px">
+  <view class="contentContainer" wx:if="{{!showTextarea}}" bindlongpress='setTextarea' style="min-height: {{homeHeight-(menuHeight+statusBarHeight+4)}}px; top: {{menuHeight+statusBarHeight+4}}px; max-width:{{homeWidth}}px;word-wrap:break-word;">
+    <view class="content">{{content}}</view>
+  </view>
+  <textarea wx:if="{{showTextarea}}" auto-focus="{{showTextarea}}"  maxlength='99' bindconfirm='setTextarea' bindinput='setContent'class="contentContainer" style="font-family: 'chi'; width:{{homeWidth}}px; min-height: {{homeHeight-(menuHeight+statusBarHeight+4)}}px; top: {{menuHeight+statusBarHeight+4}}px; word-wrap:break-word;" value="{{content}}"/>
+  <view class="textContainer">
+    <view class="wifes">
+      <view class="z">zhangliuyingzi</view>
+      <view class="q">qiulumiao</view>
+    </view>
+
+    <view class="timeContainer"><view class="dayday">day</view> <view class="dayContainer">{{dday}}</view></view>
+  </view>
+</view>

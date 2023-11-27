@@ -1,0 +1,78 @@
+/* pages/home/index.wxss */
+.homeContainer {
+  background-color: black;
+  width: 750rpx;
+  display: flex;
+  align-items: center;
+  justify-self: center;
+  box-sizing: border-box;
+}
+.contentContainer {
+  /* text-indent: 30rpx; */
+  background-color: black;
+  /* z-index: 1; */
+  box-sizing: border-box;
+  padding: 0 12rpx;
+  position: absolute;
+  font-family: 'chi';
+  left: 0;
+  color: rgba(255, 255, 255, 0.178);
+  font-size: 78rpx;
+  text-align: center;
+  margin: 0!important;
+}
+
+.textContainer {
+  /* z-index: 1; */
+  color: rgba(0, 0, 255, 0.719);
+  font-family: 'ji';
+  text-align: center;
+  margin: -200rpx auto 0;
+  /* margin: 0 auto; */
+  font-size: 10rpx;
+  /* border: 5px dotted rgba(255, 255, 255, 0.562); */
+  width: 750rpx;
+  height: 750rpx;
+  border-radius: 500rpx;
+}
+.wifes {
+  margin: 70rpx 0 50rpx 0;
+  box-sizing: border-box;
+}
+.z {
+  transform: rotate(28deg);
+  font-size: 150rpx;
+  width: 500rpx;
+  margin: 0 auto;
+}
+/* .and {
+} */
+.q {
+  margin-top: 40rpx;
+  transform: rotate(-18deg);
+  font-size: 180rpx;
+  width: 500rpx;
+  margin: 40rpx auto 0;
+
+
+}
+.timeContainer {
+  width: 460rpx;
+  color: rgba(255, 0, 255, 0.76);
+  font-family: 'ji';
+  font-size: 150rpx;
+  line-height: 99rpx;
+  margin: 0 auto 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.dayday {
+  box-sizing: border-box;
+  margin: 0rpx 30rpx 0 0;
+}
+.dayContainer {
+font-family: 'num';
+font-size: 180rpx;
+}
