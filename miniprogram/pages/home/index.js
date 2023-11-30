@@ -5,13 +5,20 @@ Page({
    * 页面的初始数据
    */
   data: {
-    content:'今天我们一起吃了这路也，那是我最爱吃的这路也，知道吗，喝喝我很愤怒，我们还是吵架了，一天可以吵架八千次，不过我还能靠写页面消解，恩恩我就是个废物，其实我很想去洗澡上去和你睡觉了，想喝酒。。enen-/-',
+    content:'今天我们一起吃了这路也，那是我最爱吃的这路也，知道吗，喝喝我很愤怒，我们还是吵架了，一天可以吵架八千次，不过我还能靠写页面消解，恩恩我就是个废物，其实我很想去洗澡上去和你睡觉了，想喝酒。。enen-/-今天我们一起吃了这路也，那是我最爱吃的这路也，知道吗，喝喝我很愤怒，我们还是吵架了，一天可以吵架八',
     showTextarea:false
   },
-  setTextarea() {
-    this.setData({
-      showTextarea: !this.data.showTextarea
-    })
+  setTextarea(e) {
+    if(e==='confirm') {
+      this.setData({
+        showTextarea: false
+      })
+    }else {
+      this.setData({
+        showTextarea: !this.data.showTextarea
+      })
+    }
+    
     wx.vibrateShort()
 
   },
@@ -59,7 +66,7 @@ Page({
     })
     wx.loadFontFace({
       family: 'chi',
-      source: 'url("https://636c-cloud1-5g71z22k302f6667-1322740242.tcb.qcloud.la/ZCOOLXiaoWei-Regular.ttf?sign=b1386f780bbd000fdb53d94bfc8cbd0f&t=1701103524")',
+      source: 'url("https://636c-cloud1-5g71z22k302f6667-1322740242.tcb.qcloud.la/MFDianHui_Noncommercial-Regular.otf?sign=c208422b462c12c077f6f21fe4d9fa68&t=1701329301")',
       scopes: ['webview', 'native'], //由于canvas是原生组件，所以需要加上native，否则无效
 
       success: function () {}
@@ -78,7 +85,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
-
+    console.log(this.data.content.length)
   },
 
   /**
