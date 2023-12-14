@@ -1,6 +1,8 @@
 {
   "pages": [
+    "pages/start/index",
     "pages/home/index"
+
   ],
   "window": {
     "backgroundColor": "#000000",

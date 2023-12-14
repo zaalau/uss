@@ -49,28 +49,7 @@ Page({
         })
       }
     })
-    wx.loadFontFace({
-      family: 'num',
-      source: 'url("https://636c-cloud1-5g71z22k302f6667-1322740242.tcb.qcloud.la/THE-GLITCH.ttf?sign=b79309666bbcdd1c159fa1cc244ffd34&t=1701102360")',
-      scopes: ['webview', 'native'], //由于canvas是原生组件，所以需要加上native，否则无效
-
-      success: function () {}
-    })
-    
-    wx.loadFontFace({
-      family: 'ji',
-      source: 'url("https://636c-cloud1-5g71z22k302f6667-1322740242.tcb.qcloud.la/Rebelion.ttf?sign=74de1913683fb212594d1bd4cec29b43&t=1701101043")',
-      scopes: ['webview', 'native'], //由于canvas是原生组件，所以需要加上native，否则无效
-
-      success: function () {}
-    })
-    wx.loadFontFace({
-      family: 'chi',
-      source: 'url("https://636c-cloud1-5g71z22k302f6667-1322740242.tcb.qcloud.la/MFDianHui_Noncommercial-Regular.otf?sign=c208422b462c12c077f6f21fe4d9fa68&t=1701329301")',
-      scopes: ['webview', 'native'], //由于canvas是原生组件，所以需要加上native，否则无效
-
-      success: function () {}
-    })
+   
 
   },
 
@@ -85,7 +64,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
-    console.log(this.data.content.length)
   },
 
   /**

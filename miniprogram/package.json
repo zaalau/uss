@@ -9,6 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "weui-miniprogram": "^1.0.8"
+    "pinyin-pro": "^3.18.4",
+    "weui-miniprogram": "^1.0.8",
+    "wl-pinyin": "^1.0.1"
   }
 }

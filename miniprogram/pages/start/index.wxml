@@ -1,0 +1,17 @@
+<!--pages/start/index.wxml-->
+<view class="startContainer" style="min-height: {{startHeight}}px; padding-top: {{statusBarHeight+4}}px;">
+  <view class="inputContainer" style="height: {{startHeight*0.6}}px;">
+    <view class="jiaPlaceholeder" wx:if="{{jiaP}}">请输入甲方姓名</view>
+    <view class="yiPlaceholeder" wx:if="{{yiP}}">请输入乙方姓名</view>
+
+    <input class="jiafang" value="{{jia}}" bindfocus="setJiaP" bindblur="showJiap"  bindinput="handleJia"  maxlength="20" type="text"/>
+    <view class="and" bindtap='toHome'>&</view>
+    <input class="yifang" value="{{yi}}" bindfocus="setYiP" bindblur="showYip" bindinput="handleYi"  maxlength="20" type="text"/>
+    <!-- <picker class="picker">
+      
+    </picker> -->
+    <!-- <picker class="picker" mode="date">
+      
+    </picker> -->
+  </view>
+</view>
