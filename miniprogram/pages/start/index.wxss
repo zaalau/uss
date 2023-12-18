@@ -64,9 +64,20 @@
   font-family: 'ji';
   margin: 47% auto 0;
   text-align: center;
+  width: 130rpx;
 }
 .picker {
+  position: fixed;
+  left: 17%;
+  top: 59%;
   width: 500rpx;
   height: 100rpx;
-  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'num';
+  font-size: 70rpx;
+  border-radius: 200rpx;
+  /* border: 5rpx dotted rgb(0, 255, 0); */
+  color:  rgba(255, 0, 255, 0.6);
 }

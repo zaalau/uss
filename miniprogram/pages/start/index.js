@@ -1,62 +1,103 @@
 // pages/start/index.js
-import { pinyin } from "pinyin-pro";
+import {
+  pinyin
+} from "pinyin-pro";
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    jiaP:true,
-    yiP:true
+    jiaP: true,
+    yiP: true
   },
   toHome() {
-    wx.navigateTo({
-      url: '../home/index',
-    })
+    const {
+      jia,
+      yi,
+      date
+    } = this.data
+    if (jia && yi && date) {
+      wx.cloud.callFunction({
+        // 云函数名称
+        name: 'update_jia',
+        // 传给云函数的参数
+        data: {
+          jia,
+          yi,
+          date
+        },
+        success: function(res) {
+          wx.navigateTo({
+            url: `../home/index?date=${date}&jia=${jia}&yi=${yi}`,
+          })
+        },
+        fail: console.error
+      })
+      
+    } else {
+      wx.showToast({
+        title: '请完整填写',
+        icon: 'error'
+      })
+    }
+
   },
   setJiaP() {
     this.setData({
-      jiaP:false
+      jiaP: false
     })
   },
   showJiap() {
-    const { jia } = this.data
-    if(!jia||jia==='') {
+    const {
+      jia
+    } = this.data
+    if (!jia || jia === '') {
       this.setData({
-        jiaP:true
+        jiaP: true
       })
     }
   },
   handleJia(e) {
     const jia = e.detail.value.trim()
     this.setData({
-      jia: pinyin(jia).replace(/\s*/g,"")
+      jia: pinyin(jia, {
+        toneType: 'none'
+      }).replace(/\s*/g, "")
     })
   },
   setYiP() {
     this.setData({
-      yiP:false
+      yiP: false
     })
   },
   showYip() {
-    const { yi } = this.data
-    if(!yi||yi==='') {
+    const {
+      yi
+    } = this.data
+    if (!yi || yi === '') {
       this.setData({
-        yiP:true
+        yiP: true
       })
     }
   },
   handleYi(e) {
     const yi = e.detail.value.trim()
     this.setData({
-      yi:pinyin(yi).replace(/\s*/g,"")
+      yi: pinyin(yi, {
+        toneType: 'none'
+      }).replace(/\s*/g, "")
+    })
+  },
+  bindDateChange(e) {
+    this.setData({
+      date: e.detail.value
     })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    // console.log(pinyin('刘姐卡'))
     const res = wx.getMenuButtonBoundingClientRect()
     this.setData({
       menuHeight: res.height,
@@ -71,6 +112,30 @@ Page({
         })
       }
     })
+    wx.cloud.callFunction({
+      // 云函数名称
+      name: 'start_init',
+      // 传给云函数的参数
+      success: function(res) {
+        if(!res.result.data.successMSG) {
+          const { jia, yi, date } = res.result.data
+          wx.redirectTo({
+            url: `../home/index?date=${date}&jia=${jia}&yi=${yi}`,
+          })
+        } 
+        console.log(res)
+
+      },
+      fail: console.error
+    })
+    const fullYear = new Date().getFullYear()
+    const month = new Date().getMonth() + 1
+    const Today = new Date().getUTCDate()
+    const rightNow = fullYear + '-' + month + '-' + Today
+    this.setData({
+      rightNow
+    })
+    
   },
 
   /**

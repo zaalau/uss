@@ -7,8 +7,8 @@
   <textarea wx:if="{{showTextarea}}" auto-focus="{{showTextarea}}" maxlength='150' bindblur='setTextarea' bindconfirm="()=>{setTextarea('confirm')}" bindinput='setContent' class="contentContainer2" style="font-family: 'chi'; width:{{homeWidth}}px; top: {{menuHeight+statusBarHeight+4}}px; word-wrap:break-word;" value="{{content}}" />
   <view class="textContainer">
     <view class="wifes">
-      <view class="z">zhangliuyingzi</view>
-      <view class="q">qiulumiao</view>
+      <view class="z">{{jia}}</view>
+      <view class="q">{{yi}}</view>
     </view>
 
     <view class="timeContainer">

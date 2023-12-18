@@ -1,5 +1,6 @@
 App({
   async onLaunch() {
+    wx.cloud.init()
     wx.loadFontFace({
       family: 'num',
       source: 'url("https://636c-cloud1-5g71z22k302f6667-1322740242.tcb.qcloud.la/THE-GLITCH.ttf?sign=b79309666bbcdd1c159fa1cc244ffd34&t=1701102360")',

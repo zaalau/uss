@@ -8,7 +8,7 @@
   box-sizing: border-box;
 }
 .helpBtn {
-  position: absolute;
+  position: fixed;
   left: 25rpx;
   width: 100rpx;
   height: 100rpx;
@@ -28,6 +28,7 @@
 
 }
 .contentContainer {
+  width: 750rpx;
   text-indent: 75rpx;
   background-color: black;
   box-sizing: border-box;
@@ -66,21 +67,25 @@
 }
 .wifes {
   margin: 70rpx 0 50rpx 0;
+  /* position: fixed;
+  top: 28%;
+  left: 13%; */
   box-sizing: border-box;
+  padding: 30rpx 0 0 0;
 }
 .z {
   transform: rotate(28deg);
   font-size: 150rpx;
-  width: 500rpx;
-  margin: 0 auto;
+  /* width: 500rpx; */
+  margin: 0 auto 150rpx;
 }
 
 .q {
   margin-top: 40rpx;
   transform: rotate(-18deg);
   font-size: 180rpx;
-  width: 500rpx;
-  margin: 40rpx auto 0;
+  /* width: 500rpx; */
+  margin: 40rpx auto 100rpx;
 
 
 }
@@ -102,5 +107,5 @@
 }
 .dayContainer {
 font-family: 'num';
-font-size: 180rpx;
+font-size: 200rpx;
 }

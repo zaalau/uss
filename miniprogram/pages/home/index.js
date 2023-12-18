@@ -5,39 +5,85 @@ Page({
    * 页面的初始数据
    */
   data: {
-    content:'今天我们一起吃了这路也，那是我最爱吃的这路也，知道吗，喝喝我很愤怒，我们还是吵架了，一天可以吵架八千次，不过我还能靠写页面消解，恩恩我就是个废物，其实我很想去洗澡上去和你睡觉了，想喝酒。。enen-/-今天我们一起吃了这路也，那是我最爱吃的这路也，知道吗，喝喝我很愤怒，我们还是吵架了，一天可以吵架八',
-    showTextarea:false
+    content: '',
+    showTextarea: false
   },
   setTextarea(e) {
-    if(e==='confirm') {
+    if (e === 'confirm') {
       this.setData({
         showTextarea: false
       })
-    }else {
+    } else {
       this.setData({
         showTextarea: !this.data.showTextarea
       })
     }
-    
+
     wx.vibrateShort()
 
   },
   setContent(e) {
     this.setData({
-      content:e.detail.value
+      content: e.detail.value
     })
+    const { dday } = this.data
+    const content = e.detail.value
+    wx.cloud.callFunction({
+      // 云函数名称
+      name: 'update_diary',
+      // 传给云函数的参数
+      data:{ dday, content },
+      success: res=> {
+        console.log(res)
+      },
+      fail: console.error
+    })
+    
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
+    wx.cloud.callFunction({
+      // 云函数名称
+      name: 'home_init',
+      // 传给云函数的参数
+      success: res=> {
+        const {
+          date,
+          jia,
+          yi,
+          diary
+        } = res.result.data
+        const fullYear = new Date(date).getFullYear()
+        const month = new Date(date).getMonth()
+        const day = new Date(date).getUTCDate()
+        for (const value of diary) {
+          if(value.dday===Math.trunc((new Date().getTime() - new Date(fullYear, month, day).getTime()) / 86400000)) {
+            this.setData({
+              content: value.content
+            })
+          }
+        }
+        this.setData({
+          dday: Math.trunc((new Date().getTime() - new Date(fullYear, month, day).getTime()) / 86400000),
+          jia,
+          yi,
+        })
+      },
+      fail: console.error
+    })
+
+
+
+
     const res = wx.getMenuButtonBoundingClientRect()
     this.setData({
       menuHeight: res.height,
       menuWidth: res.width,
-      dday: Math.trunc((new Date().getTime()-new Date(2022,6,19).getTime())/86400000),
+
       Year: new Date().getFullYear(),
-      Month: new Date().getMonth()+1,
+      Month: new Date().getMonth() + 1,
       Dateday: new Date().getDate(),
     })
     wx.getSystemInfo({
@@ -49,7 +95,7 @@ Page({
         })
       }
     })
-   
+
 
   },
 
@@ -63,8 +109,7 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow() {
-  },
+  onShow() {},
 
   /**
    * 生命周期函数--监听页面隐藏
