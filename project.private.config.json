@@ -3,5 +3,6 @@
   "projectname": "Uss",
   "setting": {
     "compileHotReLoad": true
-  }
+  },
+  "libVersion": "2.33.0"
 }

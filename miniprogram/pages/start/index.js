@@ -28,7 +28,7 @@ Page({
           date
         },
         success: function(res) {
-          wx.navigateTo({
+          wx.reLaunch({
             url: `../home/index?date=${date}&jia=${jia}&yi=${yi}`,
           })
         },
@@ -117,9 +117,9 @@ Page({
       name: 'start_init',
       // 传给云函数的参数
       success: function(res) {
-        if(!res.result.data.successMSG) {
-          const { jia, yi, date } = res.result.data
-          wx.redirectTo({
+        const { jia, yi, date } = res.result.data
+        if(jia!='') {
+          wx.reLaunch({
             url: `../home/index?date=${date}&jia=${jia}&yi=${yi}`,
           })
         } 

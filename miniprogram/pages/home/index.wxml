@@ -1,6 +1,8 @@
 <!--pages/home/index.wxml-->
 <view class="homeContainer" style="min-height: {{homeHeight}}px">
-  <view class="helpBtn" style=" top: {{statusBarHeight+4}}px;" hover-class="helpBtnHover">^ ^</view>
+  <picker bindchange="bindPickerChange" value="{{diaryArr.length-1}}" range="{{diaryArr}}">
+    <view class="helpBtn" style=" top: {{statusBarHeight+4}}px;" hover-class="helpBtnHover">^ ^</view>
+  </picker>
   <view class="contentContainer" wx:if="{{!showTextarea}}" bindlongpress='setTextarea' style="min-height: {{homeHeight-(menuHeight+statusBarHeight+4)}}px; line-height: {{homeHeight*0.09-(menuHeight+statusBarHeight+4)*0.09}}px; top: {{menuHeight+statusBarHeight+4}}px; max-width:{{homeWidth}}px;word-wrap:break-word;">
     <view class="content">{{content}}</view>
   </view>

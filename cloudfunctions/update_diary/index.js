@@ -17,8 +17,7 @@ exports.main = async (event, context) => {
     dday,
     content
   } = event
-  // console.log(dday,
-  //   content)
+  
   try {
     let [users] = await Promise.all([
       db.collection('user').where({
@@ -29,34 +28,20 @@ exports.main = async (event, context) => {
       }).get(),
     ])
     console.log(users)
-    if (users.data.length === 0) {
-      const newDiary = {
-        dday,
-        content
-      }
-      await db.collection('user').where({
-        openid: OPENID
-      }).update({
-        data: {
-          diary: _.push(newDiary)
-        }
-      })
-      return {
-        success: true,
-        data: {
-          successMSG: 'update diary SUCCESS'
-        }
-      };
-    } else {
       const newDiary = users.data[0].diary.map((v, i) => {
         if (v.dday === dday) {
-          console.log('1')
           return {
             dday,
-            content
+            content,
+            creat_time: new Date()
+          }
+        }else {
+          return {
+            ...v
           }
         }
       })
+      console.log(newDiary)
       await db.collection('user').where({
         openid: OPENID
       }).update({
@@ -67,10 +52,11 @@ exports.main = async (event, context) => {
       return {
         success: true,
         data: {
-          successMSG: 'update diary SUCCESS'
+          successMSG: 'update diary SUCCESS',
+          diary: newDiary
         }
       };
-    }
+    
   } catch (error) {
     return {
       success: false,

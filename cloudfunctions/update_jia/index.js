@@ -19,6 +19,15 @@ exports.main = async (event, context) => {
     yi
   } = event
   try {
+    const fullYear = new Date(date).getFullYear()
+    const month = new Date(date).getMonth()
+    const day = new Date(date).getUTCDate()
+    const dday = Math.trunc((new Date().getTime() - new Date(fullYear, month, day).getTime()) / 86400000).toString()
+    const newDiary = [{
+      dday,
+      content: '',
+      creat_time: new Date()
+    }]
     await db.collection('user').where({
       openid: OPENID
     }).update({
@@ -26,7 +35,7 @@ exports.main = async (event, context) => {
         date,
         jia,
         yi,
-        diary:[]
+        diary: newDiary 
       }
     })
 

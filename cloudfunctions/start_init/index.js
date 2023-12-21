@@ -39,7 +39,11 @@ exports.main = async (event, context) => {
       return {
         success: true,
         data: {
-          successMSG: 'HOME INIT SUCCESS'
+          successMSG: 'HOME INIT SUCCESS',
+          date: '',
+          jia: '',
+          yi: '',
+          diary: [],
         }
       };
     } else {

@@ -41,6 +41,8 @@
   /* line-height: 120rpx; */
   text-align: justify;
   margin: 0!important;
+  white-space: pre-wrap;
+
 }
 .contentContainer2 {
   box-sizing: border-box;
@@ -53,6 +55,7 @@
   text-align: justify;
   margin: 0 !important;
   z-index: 2;
+  white-space: pre-wrap;
 }
 
 .textContainer {
