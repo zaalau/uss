@@ -1,5 +1,10 @@
 <!--pages/home/index.wxml-->
-<view class="homeContainer" style="min-height: {{homeHeight}}px">
+<view class="homeContainer" style="min-height: {{homeHeight}}px; padding-top: {{ifShowM? statusBarHeight+4 : 0}}px;">
+  <view class="mengban"  style="min-height: {{homeHeight}}px; " wx:if="{{ifShowM}}">
+    <view class="mengbantext">
+      Wellcom to GenZ couple QQ zone
+    </view>
+  </view>
   <picker bindchange="bindPickerChange" value="{{diaryArr.length-1}}" range="{{diaryArr}}">
     <view class="helpBtn" style=" top: {{statusBarHeight+4}}px;" hover-class="helpBtnHover">^ ^</view>
   </picker>

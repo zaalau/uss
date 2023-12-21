@@ -1,5 +1,10 @@
 <!--pages/start/index.wxml-->
 <view class="startContainer" style="min-height: {{startHeight}}px; padding-top: {{statusBarHeight+4}}px;">
+  <view class="mengban"  style="min-height: {{startHeight}}px; " wx:if="{{ifShowM}}">
+    <view class="mengbantext">
+    Wellcom to GenZ couple QQ zone
+    </view>
+  </view>
   <view class="inputContainer" style="height: {{startHeight*0.6}}px;">
     <view class="jiaPlaceholeder" wx:if="{{jiaP}}">甲：</view>
     <view class="yiPlaceholeder" wx:if="{{yiP}}">乙：</view>

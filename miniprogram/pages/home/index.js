@@ -7,6 +7,7 @@ Page({
   data: {
     content: '',
     showTextarea: false,
+    ifShowM: true
   },
 
   setTextarea(e) {
@@ -30,7 +31,7 @@ Page({
       data: {
         dday,
         content
-      }, 
+      },
       success: res => {
         const diaryArr = res.result.data.diary.map((v, i) => {
           return `${v.creat_time.slice(0,10)} 第${v.dday}天`
@@ -77,6 +78,23 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
+    const res = wx.getMenuButtonBoundingClientRect()
+    this.setData({
+      menuHeight: res.height,
+      menuWidth: res.width,
+      Year: new Date().getFullYear(),
+      Month: new Date().getMonth() + 1,
+      Dateday: new Date().getDate(),
+    })
+    wx.getSystemInfo({
+      success: res => {
+        this.setData({
+          homeHeight: res.windowHeight,
+          homeWidth: res.windowWidth,
+          statusBarHeight: res.statusBarHeight
+        })
+      }
+    })
     wx.cloud.callFunction({
       // 云函数名称
       name: 'home_init',
@@ -92,20 +110,22 @@ Page({
         const fullYear = new Date(date).getFullYear()
         const month = new Date(date).getMonth()
         const day = new Date(date).getUTCDate()
-        console.log('1',diary)
+        // console.log('1',diary)
         let diaryArr;
         let diarys;
-        if(diary===[]){
+        if (diary === []) {
           diaryArr = ['暂无日志'],
-          diarys = [{content:''}]
-        }else {
+            diarys = [{
+              content: ''
+            }]
+        } else {
           diaryArr = diary.map((v, i) => {
             return `${v.creat_time.slice(0,10)} 第${v.dday}天`
-          }) ;
+          });
           diarys = diary.filter((v) => v.dday === Math.trunc((new Date().getTime() - new Date(fullYear, month, day).getTime()) / 86400000).toString());
         }
-        console.log('2',diarys)
-        console.log('3',diaryArr)
+        // console.log('2',diarys)
+        // console.log('3',diaryArr)
 
         this.setData({
           content: diarys[0].content,
@@ -113,29 +133,17 @@ Page({
           jia,
           yi,
           diaryArr,
-          diary: diary || []
+          diary
         })
+        setTimeout(() => {
+          this.setData({
+            ifShowM: false
+          })
+        }, 1000)
       },
       fail: console.error
     })
-    const res = wx.getMenuButtonBoundingClientRect()
-    this.setData({
-      menuHeight: res.height,
-      menuWidth: res.width,
-
-      Year: new Date().getFullYear(),
-      Month: new Date().getMonth() + 1,
-      Dateday: new Date().getDate(),
-    })
-    wx.getSystemInfo({
-      success: res => {
-        this.setData({
-          homeHeight: res.windowHeight,
-          homeWidth: res.windowWidth,
-          statusBarHeight: res.statusBarHeight
-        })
-      }
-    })
+    
 
 
   },

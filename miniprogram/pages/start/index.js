@@ -9,7 +9,8 @@ Page({
    */
   data: {
     jiaP: true,
-    yiP: true
+    yiP: true,
+    ifShowM: true
   },
   toHome() {
     const {
@@ -116,13 +117,27 @@ Page({
       // 云函数名称
       name: 'start_init',
       // 传给云函数的参数
-      success: function(res) {
+      success: res => {
         const { jia, yi, date } = res.result.data
         if(jia!='') {
-          wx.reLaunch({
-            url: `../home/index?date=${date}&jia=${jia}&yi=${yi}`,
-          })
-        } 
+          
+          setTimeout(()=>{  
+            wx.reLaunch({
+              url: `../home/index?date=${date}&jia=${jia}&yi=${yi}`,
+            })      
+            this.setData({
+              ifShowM:false
+            })    
+          },1500)
+          
+        } else{
+          setTimeout(()=>{
+            this.setData({
+              ifShowM:false
+            })  
+          },1000)
+        }
+        
         console.log(res)
 
       },
@@ -142,7 +157,8 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady() {
-
+    
+    
   },
 
   /**
