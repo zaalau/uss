@@ -145,7 +145,7 @@ Page({
     })
     const fullYear = new Date().getFullYear()
     const month = new Date().getMonth() + 1
-    const Today = new Date().getUTCDate()
+    const Today = new Date().getDate()
     const rightNow = fullYear + '-' + month + '-' + Today
     this.setData({
       rightNow

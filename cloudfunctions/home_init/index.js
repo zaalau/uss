@@ -28,12 +28,12 @@ exports.main = async (event, context) => {
     } = users.data[0]
     const fullYear = new Date(date).getFullYear()
     const month = new Date(date).getMonth()
-    const day = new Date(date).getUTCDate()
+    const day = new Date(date).getDate()
     const dday = Math.trunc((new Date().getTime() - new Date(fullYear, month, day).getTime()) / 86400000).toString()
     const newDiary = {
       dday,
       content: '',
-      creat_time: new Date()
+      create_time: new Date()
     }
     let ifFirst
     for (const i of diary) {

@@ -19,7 +19,7 @@
     </view>
 
     <view class="timeContainer">
-      <view class="dayday">day</view>
+      <view class="dayday">{{dayText}}</view>
       <view class="dayContainer">{{dday}}</view>
     </view>
   </view>

@@ -24,6 +24,7 @@ Page({
       dday,
       content
     } = this.data
+    console.log(dday,content)
     wx.cloud.callFunction({
       // 云函数名称
       name: 'update_diary',
@@ -34,7 +35,7 @@ Page({
       },
       success: res => {
         const diaryArr = res.result.data.diary.map((v, i) => {
-          return `${v.creat_time.slice(0,10)} 第${v.dday}天`
+          return `${new Date(v.create_time).getFullYear()}-${new Date(v.create_time).getMonth()+1}-${new Date(v.create_time).getDate()} 第${v.dday}天`
         })
         this.setData({
           diaryArr,
@@ -78,6 +79,56 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
+    wx.cloud.callFunction({
+      // 云函数名称
+      name: 'home_init',
+      // 传给云函数的参数
+      success: res => {
+        console.log(res)
+        const {
+          date,
+          jia,
+          yi,
+          diary
+        } = res.result.data
+        const fullYear = new Date(date).getFullYear()
+        const month = new Date(date).getMonth()
+        const day = new Date(date).getDate()
+        // console.log('1',diary)
+        let diaryArr;
+        let diarys;
+        if (diary === []) {
+          diaryArr = ['暂无日志'],
+            diarys = [{
+              content: ''
+            }]
+        } else {
+          diaryArr = diary.map((v, i) => {
+            // console.log(`${new Date(v.create_time).getFullYear()}-${new Date(v.create_time).getMonth()+1}-${new Date(v.create_time).getDate()}`)
+            return `${new Date(v.create_time).getFullYear()}-${new Date(v.create_time).getMonth()+1}-${new Date(v.create_time).getDate()} 第${v.dday}天`
+          });
+          diarys = diary.filter((v) => v.dday === Math.trunc((new Date().getTime() - new Date(fullYear, month, day).getTime()) / 86400000).toString());
+        }
+        // console.log('2',diarys)
+        // console.log('3',diaryArr)
+
+        this.setData({
+          content: diarys[0].content,
+          dday: Math.trunc((new Date().getTime() - new Date(fullYear, month, day).getTime()) / 86400000).toString(),
+          dayText:'day',
+          jia,
+          yi,
+          diaryArr,
+          diary
+        })
+        setTimeout(() => {
+          this.setData({
+            ifShowM: false
+          })
+        }, 1000)
+      },
+      fail: console.error
+    })
     const res = wx.getMenuButtonBoundingClientRect()
     this.setData({
       menuHeight: res.height,
@@ -95,54 +146,7 @@ Page({
         })
       }
     })
-    wx.cloud.callFunction({
-      // 云函数名称
-      name: 'home_init',
-      // 传给云函数的参数
-      success: res => {
-        console.log(res)
-        const {
-          date,
-          jia,
-          yi,
-          diary
-        } = res.result.data
-        const fullYear = new Date(date).getFullYear()
-        const month = new Date(date).getMonth()
-        const day = new Date(date).getUTCDate()
-        // console.log('1',diary)
-        let diaryArr;
-        let diarys;
-        if (diary === []) {
-          diaryArr = ['暂无日志'],
-            diarys = [{
-              content: ''
-            }]
-        } else {
-          diaryArr = diary.map((v, i) => {
-            return `${v.creat_time.slice(0,10)} 第${v.dday}天`
-          });
-          diarys = diary.filter((v) => v.dday === Math.trunc((new Date().getTime() - new Date(fullYear, month, day).getTime()) / 86400000).toString());
-        }
-        // console.log('2',diarys)
-        // console.log('3',diaryArr)
-
-        this.setData({
-          content: diarys[0].content,
-          dday: Math.trunc((new Date().getTime() - new Date(fullYear, month, day).getTime()) / 86400000).toString(),
-          jia,
-          yi,
-          diaryArr,
-          diary
-        })
-        setTimeout(() => {
-          this.setData({
-            ifShowM: false
-          })
-        }, 1000)
-      },
-      fail: console.error
-    })
+    
     
 
 

@@ -30,10 +30,11 @@ exports.main = async (event, context) => {
     console.log(users)
       const newDiary = users.data[0].diary.map((v, i) => {
         if (v.dday === dday) {
+          console.log('v.dday === dday')
           return {
+            ...v,
             dday,
             content,
-            creat_time: new Date()
           }
         }else {
           return {
