@@ -30,6 +30,7 @@ exports.main = async (event, context) => {
     const month = new Date(date).getMonth()
     const day = new Date(date).getDate()
     const dday = Math.trunc((new Date().getTime() - new Date(fullYear, month, day).getTime()) / 86400000).toString()
+    console.log(dday,new Date(date),new Date())
     const newDiary = {
       dday,
       content: '',
